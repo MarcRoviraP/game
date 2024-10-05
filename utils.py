@@ -8,6 +8,11 @@ FPS = 60
 
 VELOCITAT = 5
 
+PROYECTILSIZEX = 10
+PROYECTILSIZEY = 20
+
+PROYECTILCOOLDOWN = 200
+
 
 class colores:
     red = (255, 0, 0)

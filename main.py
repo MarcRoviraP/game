@@ -32,11 +32,25 @@ for i in range(1,7):
 
 #Crea un objeto de la clase Personaje
 jugador = Personaje(50,50,animacio)
+
+llistaProyectils = []
+
+#Temporizador per als tirs
+ultimTir = 0
+
 while run:
     
     
+    #Controlar els fps del programa
     fps.tick(utils.FPS)
     screen.fill(colores.black)
+    
+    #Dibuixar els proyectils
+    for proyectil in llistaProyectils:
+        if proyectil.movment():
+            llistaProyectils.remove(proyectil)
+        proyectil.draw(screen)
+    
     
     #Calcular el moviment del jugador
     mov_x = 0
@@ -54,14 +68,16 @@ while run:
         jugador.img = pygame.image.load("assets//img//disparar//disparar_2.png")
         jugador.flip = True if jugador.flip == False else False
         
+        #Crear un proyectil
+        if pygame.time.get_ticks() - ultimTir >= utils.PROYECTILCOOLDOWN:
+            ultimTir = pygame.time.get_ticks()
+            proyectil = Proyectil(jugador.shape.centerx,jugador.shape.centery)
+            llistaProyectils.append(proyectil)
+        
     jugador.update()
         
     for event in pygame.event.get():
-        
-        #Controlar els fps del programa
-        
-        
-            
+                   
         #Si detecta que es tanca la pantalla el programa s'acaba
         if event.type == pygame.QUIT:
             run = False

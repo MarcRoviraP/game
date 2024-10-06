@@ -13,6 +13,7 @@ PROYECTILSIZEY = 20
 
 PROYECTILCOOLDOWN = 200
 
+MOVENEMIC = 10
 
 class colores:
     red = (255, 0, 0)

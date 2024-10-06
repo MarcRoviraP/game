@@ -3,6 +3,7 @@ from personaje import Personaje
 from proyectil import Proyectil
 from utils import colores
 from arma import Arma
+from enemic import Enemic
     
 
 pygame.init()
@@ -46,6 +47,7 @@ llistaProyectils = []
 #Temporizador per als tirs
 ultimTir = 0
 
+enemy = Enemic()
 while run:
     # Controlar els fps del programa
     fps.tick(utils.FPS)
@@ -73,10 +75,13 @@ while run:
     # Moure al jugador
     jugador.movment(mov_x, mov_y)
 
-    # Actualitzar posició de la torreta en cada iteració per a que segueixi el jugador
+    # Actualitzar posició de la torreta en cada iteració per seguir al jugador
     torreta.update(jugador)
     
-    # Si el jugador està disparant
+    
+   
+    enemy.update()
+    enemy.draw(screen,jugador)
     if shoot:
         # Dibuixar la torreta
         torreta.draw(screen)

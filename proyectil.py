@@ -3,7 +3,7 @@ from utils import colores
 
 class Proyectil:
     def __init__(self,x,y):
-        print(pygame.time.get_ticks())
+
         self.shape = pygame.Rect(0,0,utils.PROYECTILSIZEX,utils.PROYECTILSIZEY)
         self.shape.center = (x,y)
         self.img = pygame.image.load("assets//img//disparar//municio.png")

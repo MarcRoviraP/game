@@ -6,11 +6,13 @@ class Proyectil:
         print(pygame.time.get_ticks())
         self.shape = pygame.Rect(0,0,utils.PROYECTILSIZEX,utils.PROYECTILSIZEY)
         self.shape.center = (x,y)
+        self.img = pygame.image.load("assets//img//disparar//municio.png")
         
         
     def draw(self,screen):
         
-        pygame.draw.rect(screen,colores.red,self.shape)
+        #pygame.draw.rect(screen,colores.red,self.shape)
+        screen.blit(self.img,self.shape)
         
     def movment(self):
         self.shape.y -= 5

@@ -65,6 +65,7 @@ while run:
     if movment_D:
         mov_x += utils.VELOCITAT
     if shoot:
+
         jugador.img = pygame.image.load("assets//img//disparar//disparar_2.png")
         jugador.flip = True if jugador.flip == False else False
         
@@ -73,8 +74,8 @@ while run:
             ultimTir = pygame.time.get_ticks()
             proyectil = Proyectil(jugador.shape.centerx,jugador.shape.centery)
             llistaProyectils.append(proyectil)
+        jugador.update()
         
-    jugador.update()
         
     for event in pygame.event.get():
                    

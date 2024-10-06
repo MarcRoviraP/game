@@ -2,7 +2,7 @@ import pygame,utils
 from personaje import Personaje
 from proyectil import Proyectil
 from utils import colores
-
+from arma import Arma
     
 
 pygame.init()
@@ -24,14 +24,22 @@ run = True
 
 #Simular animacio tirs
 
-animacio = []
+animacioJugador = []
 
-for i in range(1,7):
 
-    animacio.append(pygame.image.load(f"assets//img//disparar//disparar_{i}.png"))
+animacioJugador.append(pygame.image.load(f"assets//img//disparar//disparar_{0}.png"))
 
 #Crea un objeto de la clase Personaje
-jugador = Personaje(50,50,animacio)
+jugador = Personaje(50,50,animacioJugador)
+
+#Crear arma del jugador
+
+animacioTorreta = []
+
+for i in range(1,7):
+    animacioTorreta.append(pygame.image.load(f"assets//img//disparar//disparar_{i}.png"))    
+    
+torreta = Arma(animacioTorreta)
 
 llistaProyectils = []
 
@@ -39,20 +47,17 @@ llistaProyectils = []
 ultimTir = 0
 
 while run:
-    
-    
-    #Controlar els fps del programa
+    # Controlar els fps del programa
     fps.tick(utils.FPS)
     screen.fill(colores.black)
     
-    #Dibuixar els proyectils
+    # Dibuixar els proyectils
     for proyectil in llistaProyectils:
         if proyectil.movment():
             llistaProyectils.remove(proyectil)
         proyectil.draw(screen)
     
-    
-    #Calcular el moviment del jugador
+    # Calcular el moviment del jugador
     mov_x = 0
     mov_y = 0
     
@@ -64,25 +69,39 @@ while run:
         mov_y += utils.VELOCITAT
     if movment_D:
         mov_x += utils.VELOCITAT
-    if shoot:
 
-        jugador.img = pygame.image.load("assets//img//disparar//disparar_2.png")
-        jugador.flip = True if jugador.flip == False else False
+    # Moure al jugador
+    jugador.movment(mov_x, mov_y)
+
+    # Actualitzar posició de la torreta en cada iteració per a que segueixi el jugador
+    torreta.update(jugador)
+    
+    # Si el jugador està disparant
+    if shoot:
+        # Dibuixar la torreta
+        torreta.draw(screen)
         
-        #Crear un proyectil
+        # Simular animació de disparar
+        torreta.animacioCargarTorreta(jugador)
+
+        # Crear un proyectil si el cooldown ho permet
         if pygame.time.get_ticks() - ultimTir >= utils.PROYECTILCOOLDOWN:
             ultimTir = pygame.time.get_ticks()
-            proyectil = Proyectil(jugador.shape.centerx,jugador.shape.centery)
+            proyectil = Proyectil(jugador.shape.centerx, jugador.shape.centery)
             llistaProyectils.append(proyectil)
-        jugador.update()
-        
-        
+    
+    # Dibuixar el jugador
+    jugador.draw(screen)
+   
+    # Actualitza la pantalla
+    pygame.display.update()
+
+    # Detectar els esdeveniments
     for event in pygame.event.get():
-                   
-        #Si detecta que es tanca la pantalla el programa s'acaba
+        # Si detecta que es tanca la pantalla el programa s'acaba
         if event.type == pygame.QUIT:
             run = False
-        
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
                 movment_A = True
@@ -94,8 +113,7 @@ while run:
                 movment_W = True
             if event.key == pygame.K_SPACE:
                 shoot = True
-               
-                
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 movment_A = False
@@ -107,12 +125,4 @@ while run:
                 movment_W = False
             if event.key == pygame.K_SPACE:
                 shoot = False
-                jugador.img = pygame.image.load("assets//img//disparar//disparar_1.png")
-                
-                
-    #Moure al jugador
-    jugador.movment(mov_x,mov_y)
-    jugador.draw(screen)
-            
-    #Actualitza la pantalla
-    pygame.display.update()
+                jugador.img = pygame.image.load("assets//img//disparar//disparar_0.png")

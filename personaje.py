@@ -15,6 +15,7 @@ class Personaje:
         
         #Crea la figura del jugador
         self.shape = pygame.Rect(0,0,utils.PSIZEX,utils.PSIZEY)
+        
         self.shape.center = (x,y)
         
         

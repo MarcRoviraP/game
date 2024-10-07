@@ -47,11 +47,30 @@ llistaProyectils = []
 #Temporizador per als tirs
 ultimTir = 0
 
-enemy = Enemic()
+llistaEnemics = []
+
+grupColisionsEnemy = pygame.sprite.Group()
+grupColisionsProyectil = pygame.sprite.Group()
+
+# Genera enemics amb intervals adequats
+for i in range(1, 31):
+    for j in range(1, 4):
+        x_pos = i * 100  # Ajusta l'interval horitzontal
+        y_pos = j * 60   # Ajusta l'interval vertical
+        enemy = Enemic(x_pos, y_pos)
+        llistaEnemics.append(enemy)
+        grupColisionsEnemy.add(enemy)
+        
 while run:
     # Controlar els fps del programa
     fps.tick(utils.FPS)
     screen.fill(colores.black)
+    
+    #Comprobar colisions entre bales i enemics
+    
+    colisions = pygame.sprite.groupcollide(grupColisionsProyectil, grupColisionsEnemy, True, True)
+    if colisions:
+        print("Colision")
     
     # Dibuixar els proyectils
     for proyectil in llistaProyectils:
@@ -79,9 +98,12 @@ while run:
     torreta.update(jugador)
     
     
-   
-    enemy.update()
-    enemy.draw(screen,jugador)
+    for enemy in llistaEnemics:
+        
+        if enemy.update():
+            llistaEnemics.remove(enemy)
+        enemy.draw(screen,jugador)
+        
     if shoot:
         # Dibuixar la torreta
         torreta.draw(screen)
@@ -94,6 +116,7 @@ while run:
             ultimTir = pygame.time.get_ticks()
             proyectil = Proyectil(jugador.shape.centerx, jugador.shape.centery)
             llistaProyectils.append(proyectil)
+            grupColisionsProyectil.add(proyectil)
     
     # Dibuixar el jugador
     jugador.draw(screen)

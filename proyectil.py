@@ -1,22 +1,26 @@
-import pygame,utils,time
-from utils import colores
+import pygame,utils
 
-class Proyectil:
+class Proyectil(pygame.sprite.Sprite):
     def __init__(self,x,y):
-
-        self.shape = pygame.Rect(0,0,utils.PROYECTILSIZEX,utils.PROYECTILSIZEY)
-        self.shape.center = (x,y)
+        super().__init__()
         self.img = pygame.image.load("assets//img//disparar//municio.png")
+        self.rect = self.img.get_rect()        
+        self.rect.topleft = (x, y)
+        
+        self.shape = self.rect
+        self.shape.center = (x,y)
+
         
         
     def draw(self,screen):
         
         #pygame.draw.rect(screen,colores.red,self.shape)
         screen.blit(self.img,self.shape)
+        #Dibuixar hitbox
+        pygame.draw.rect(screen,utils.colores.azure,self.rect,1)
         
     def movment(self):
-        self.shape.y -= 5
-        if self.shape.y <= 0:
-            return True
-        else:
-            return False
+        self.shape.y -= (40.0 / utils.PROYECTILCOOLDOWN * 25.0) + 1
+        
+        return self.shape.y <= 0
+       

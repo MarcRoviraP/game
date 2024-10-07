@@ -1,5 +1,4 @@
-import pygame
-from personaje import Personaje
+import pygame,utils
 
 class Arma:
     def __init__(self, animacio):
@@ -17,7 +16,7 @@ class Arma:
         
         
     def animacioCargarTorreta (self,personaje):
-        cooldown = 100
+        cooldown = utils.VELOCITATJOC_COOLDOWN
         
         if pygame.time.get_ticks() - self.timeUpdate > cooldown:
             self.frameIndex += 1
@@ -27,6 +26,7 @@ class Arma:
             self.timeUpdate = pygame.time.get_ticks()
         
         self.update(personaje)
+        
     def draw (self,screen):
         screen.blit(self.imgOrig,self.shape)
         

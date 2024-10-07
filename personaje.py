@@ -1,8 +1,9 @@
 import pygame,utils
 from utils import colores
 
-class Personaje:
+class Personaje(pygame.sprite.Sprite):
     def __init__(self,x,y,animacio):
+        super().__init__()
         self.flip = False
         self.animacio = animacio
         
@@ -32,7 +33,8 @@ class Personaje:
         self.shape.y += mov_y
     
     def update(self):
-        cooldown = 100
+        #Actualiza la animacio del jugador
+        cooldown = utils.VELOCITATJOC_COOLDOWN
         self.img = self.animacio[self.frameIndex]
         
         if pygame.time.get_ticks() - self.timeUpdate >= cooldown:

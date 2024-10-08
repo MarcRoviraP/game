@@ -12,7 +12,8 @@ class Arma:
         self.timeUpdate = pygame.time.get_ticks()
         
         
-        self.shape = self.imgOrig.get_rect()    
+        self.shape = self.imgOrig.get_rect()   
+         
         
         
     def animacioCargarTorreta (self,personaje):
@@ -32,5 +33,5 @@ class Arma:
         
     def update(self,personaje):
         
-        self.shape.centerx = personaje.shape.centerx+8
-        self.shape.centery = personaje.shape.centery
+        self.shape.centerx = personaje.shape.centerx
+        self.shape.centery = personaje.shape.centery-30

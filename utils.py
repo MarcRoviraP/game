@@ -1,6 +1,6 @@
 import math
 #Determina la velocitat del joc
-VELOCITATJOC_COOLDOWN = 10
+VELOCITATJOC_COOLDOWN = 100
 
 
 SCREEN_WIDTH = 640

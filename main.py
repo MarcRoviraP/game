@@ -51,13 +51,14 @@ llistaEnemics = []
 
 grupColisionsEnemy = pygame.sprite.Group()
 grupColisionsProyectil = pygame.sprite.Group()
+colisioJugador = pygame.sprite.GroupSingle()
 
 # Genera enemics amb intervals adequats
 for i in range(1, 31):
     for j in range(1, 4):
         x_pos = i * 100  # Ajusta l'interval horitzontal
         y_pos = j * 60   # Ajusta l'interval vertical
-        enemy = Enemic(x_pos, y_pos)
+        enemy = Enemic(x_pos, y_pos, i + j*1000)
         llistaEnemics.append(enemy)
         grupColisionsEnemy.add(enemy)
         
@@ -66,16 +67,34 @@ while run:
     fps.tick(utils.FPS)
     screen.fill(colores.black)
     
-    #Comprobar colisions entre bales i enemics
     
+    colisioJugador.add(jugador)
+    
+    # Comprovar colisions entre proyectils i enemics i eliminar-los si hi ha colisio els booleans True indiquen que s'han de borrar
     colisions = pygame.sprite.groupcollide(grupColisionsProyectil, grupColisionsEnemy, True, True)
-    if colisions:
-        print("Colision")
     
+    colisionsEnemiPlayer = pygame.sprite.groupcollide(colisioJugador, grupColisionsEnemy, False, False)
+    
+    if colisionsEnemiPlayer:
+        run = False
+        print("Has perdut")
+        
+    if colisions:
+        #Imprimir la balas que han colisionat
+        
+        print("Balas colisionades")
+        for proyectil in colisions.keys():
+            #Borrar proyectil de la llista
+            llistaProyectils.remove(proyectil)
+        for enemy in colisions.values():
+            #Borrar enemic de la llista
+            llistaEnemics.remove(enemy[0])
+                
     # Dibuixar els proyectils
     for proyectil in llistaProyectils:
         if proyectil.movment():
             llistaProyectils.remove(proyectil)
+            grupColisionsProyectil.remove(proyectil)
         proyectil.draw(screen)
     
     # Calcular el moviment del jugador
@@ -114,7 +133,7 @@ while run:
         # Crear un proyectil si el cooldown ho permet
         if pygame.time.get_ticks() - ultimTir >= utils.PROYECTILCOOLDOWN:
             ultimTir = pygame.time.get_ticks()
-            proyectil = Proyectil(jugador.shape.centerx, jugador.shape.centery)
+            proyectil = Proyectil(jugador.shape.centerx, jugador.shape.centery, pygame.time.get_ticks())
             llistaProyectils.append(proyectil)
             grupColisionsProyectil.add(proyectil)
     

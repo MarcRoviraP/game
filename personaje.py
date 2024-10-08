@@ -1,6 +1,5 @@
 import pygame,utils
 from utils import colores
-
 class Personaje(pygame.sprite.Sprite):
     def __init__(self,x,y,animacio):
         super().__init__()
@@ -17,11 +16,12 @@ class Personaje(pygame.sprite.Sprite):
         #Crea la figura del jugador
         self.shape = pygame.Rect(0,0,utils.PSIZEX,utils.PSIZEY)
         
-        self.shape.center = (x,y)
-        
+                
+        self.rect = self.shape
+        self.rect.inflate_ip(9, 9)
         
     def draw(self,screen):
-        #Invertix en la x la img 
+        #Invertix en la x la img cuant es true
         imagFlip = pygame.transform.flip(self.img,self.flip,False)
         screen.blit(imagFlip,self.shape)
         

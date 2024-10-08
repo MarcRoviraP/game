@@ -5,6 +5,8 @@ class Personaje(pygame.sprite.Sprite):
         super().__init__()
         self.flip = False
         self.animacio = animacio
+        self.health = 100
+        self.ultimHit = 0
         
         #Imagen actual de la animacio
         self.frameIndex = 0 
@@ -31,6 +33,14 @@ class Personaje(pygame.sprite.Sprite):
     def movment (self, mov_x, mov_y):
         self.shape.x += mov_x
         self.shape.y += mov_y
+        #Actualizar img
+
+        if self.health in range(0,26):
+            self.img = pygame.image.load(f"assets//img//jugador//nave_3.png")
+        elif self.health in range(26,51):
+            self.img = pygame.image.load(f"assets//img//jugador//nave_2.png")
+        elif self.health in range(51,76):
+            self.img = pygame.image.load(f"assets//img//jugador//nave_1.png")
     
     def update(self):
         #Actualiza la animacio del jugador
@@ -43,3 +53,4 @@ class Personaje(pygame.sprite.Sprite):
             
         if self.frameIndex >= len(self.animacio):
             self.frameIndex = 0
+        

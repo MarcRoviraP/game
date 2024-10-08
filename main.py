@@ -86,9 +86,15 @@ while run:
     
     colisionsEnemiPlayer = pygame.sprite.groupcollide(colisioJugador, grupColisionsEnemy, False, False)
     
-    if colisionsEnemiPlayer:
-        run = False
-        print("Has perdut")
+    if jugador.ultimHit + utils.VELOCITATJOC_COOLDOWN*3 <= pygame.time.get_ticks():
+        if colisionsEnemiPlayer:
+            jugador.health -= 25
+            jugador.ultimHit = pygame.time.get_ticks()
+            jugador.shape.centerx = 200
+            jugador.shape.centery = 200
+            if jugador.health <= 0:
+                run = False
+                print("Has perdut")
         
     if colisions:
         #Imprimir la balas que han colisionat

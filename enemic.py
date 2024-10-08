@@ -37,8 +37,11 @@ class Enemic(pygame.sprite.Sprite):
 
             # Si toca la paret canvia de direcció
             if self.shape.centerx >= utils.SCREEN_WIDTH - 10 or self.shape.centerx <= 0:
-                self.valorX = -self.valorX
+                #self.valorX = -self.valorX
                 self.shape.centery += abs(self.valorX) * 2
+                self.shape.centerx = 10
 
             self.timeUpdate = pygame.time.get_ticks()
+            
+        #Si toca el terra torna a true
         return self.shape.centery >= utils.SCREEN_HEIGHT - 100

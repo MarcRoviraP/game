@@ -14,7 +14,7 @@ class Personaje(pygame.sprite.Sprite):
         self.timeUpdate = pygame.time.get_ticks()
         
         #Crea la figura del jugador
-        self.shape = pygame.Rect(0,0,utils.PSIZEX,utils.PSIZEY)
+        self.shape = pygame.Rect(x,y,utils.PSIZEX,utils.PSIZEY)
         
                 
         self.rect = self.shape

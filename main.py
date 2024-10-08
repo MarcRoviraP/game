@@ -22,7 +22,7 @@ shoot = False
 fps = pygame.time.Clock()
 run = True
 
-
+enemyTimeUpdate = 0
 #Simular animacio tirs
 
 animacioJugador = []
@@ -31,7 +31,7 @@ animacioJugador = []
 animacioJugador.append(pygame.image.load(f"assets//img//disparar//disparar_{0}.png"))
 
 #Crea un objeto de la clase Personaje
-jugador = Personaje(50,50,animacioJugador)
+jugador = Personaje(200,200,animacioJugador)
 
 #Crear arma del jugador
 
@@ -53,21 +53,32 @@ grupColisionsEnemy = pygame.sprite.Group()
 grupColisionsProyectil = pygame.sprite.Group()
 colisioJugador = pygame.sprite.GroupSingle()
 
-# Genera enemics amb intervals adequats
-for i in range(1, 31):
-    for j in range(1, 4):
-        x_pos = i * 100  # Ajusta l'interval horitzontal
-        y_pos = j * 60   # Ajusta l'interval vertical
-        enemy = Enemic(x_pos, y_pos, i + j*1000)
-        llistaEnemics.append(enemy)
-        grupColisionsEnemy.add(enemy)
+
+score = 0
+
+
+
         
 while run:
     # Controlar els fps del programa
     fps.tick(utils.FPS)
     screen.fill(colores.black)
+    #Crear label score
+    font = pygame.font.Font(None, 36)
+    text = font.render(f"Score: {score}", True, colores.white)
+    textRect = text.get_rect()
+    textRect.center = (utils.SCREEN_WIDTH // 2, 50)
+    textRect.y = 10
+    #Dibuixar el text
+    screen.blit(text, textRect)
     
-    
+    #Spawn mobs
+    if enemyTimeUpdate + utils.VELOCITATJOC_COOLDOWN * 4 <= pygame.time.get_ticks():
+        enemyTimeUpdate = pygame.time.get_ticks()
+        enemy = Enemic(0, 0, pygame.time.get_ticks())  
+        llistaEnemics.append(enemy)
+        grupColisionsEnemy.add(enemy)
+        
     colisioJugador.add(jugador)
     
     # Comprovar colisions entre proyectils i enemics i eliminar-los si hi ha colisio els booleans True indiquen que s'han de borrar
@@ -81,7 +92,7 @@ while run:
         
     if colisions:
         #Imprimir la balas que han colisionat
-        
+        score += 10
         print("Balas colisionades")
         for proyectil in colisions.keys():
             #Borrar proyectil de la llista

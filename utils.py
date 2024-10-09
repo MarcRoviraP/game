@@ -7,6 +7,7 @@ rutaIMG = f"assets//{tema}//img//"
 rutaAudio = f"assets//{tema}//audio//"
 rutaFonts = f"assets//{tema}//font//"
 
+
 SCREEN_WIDTH = 1800
 SCREEN_HEIGHT = 480
 
@@ -95,3 +96,5 @@ class colores:
     greenyellow = (173, 255, 47)
     chartreuse = (127, 255, 0)
     lawngreen = (124, 252, 0)
+    
+backColor = colores.black

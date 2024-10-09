@@ -64,9 +64,10 @@ explosions = []
 #Crear img vides jugador
 imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_4.png")
 while run:
+    print(utils.rutaFonts)
     # Controlar els fps del programa
     fps.tick(utils.FPS)
-    screen.fill(colores.black)
+    screen.fill(utils.backColor)
     
     for proyectilEnemic in llistaProyectilsEnemics:
         if proyectilEnemic.movment():

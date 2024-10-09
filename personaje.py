@@ -1,5 +1,4 @@
 import pygame,utils
-from utils import colores
 class Personaje(pygame.sprite.Sprite):
     def __init__(self,x,y,animacio):
         super().__init__()
@@ -33,8 +32,17 @@ class Personaje(pygame.sprite.Sprite):
     def movment (self, mov_x, mov_y):
         self.shape.x += mov_x
         self.shape.y += mov_y
+        
+        if self.shape.x <= 0:
+            self.shape.x = utils.SCREEN_WIDTH
+        elif self.shape.x >= utils.SCREEN_WIDTH:
+            self.shape.x = 0
+        elif self.shape.y <= 0:
+            self.shape.y -= mov_y
+        elif self.shape.y >= utils.SCREEN_HEIGHT -20:
+            self.shape.y -= mov_y
+            
         #Actualizar img
-
         if self.health == 1:
             self.img = pygame.image.load(f"{utils.rutaIMG}jugador//nave_3.png")
         elif self.health == 2:

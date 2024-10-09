@@ -4,7 +4,7 @@ from proyectil import Proyectil
 from utils import colores
 from arma import Arma
 from enemic import Enemic
-import fontTools
+import time
 
 pygame.init()
 
@@ -59,7 +59,8 @@ score = 0
 
 explosions = []
 
-        
+#Crear img vides jugador
+imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_4.png")
 while run:
     # Controlar els fps del programa
     fps.tick(utils.FPS)
@@ -69,7 +70,6 @@ while run:
     
     #Generar explosions
     for explosion in explosions:
-        print(explosions)
         explosion.draw(screen)
         if explosion.contUpdate >= 11:
             explosions.remove(explosion)
@@ -89,10 +89,12 @@ while run:
     
     if jugador.ultimHit + utils.VELOCITATJOC_COOLDOWN*3 <= pygame.time.get_ticks():
         if colisionsEnemiPlayer:
-            jugador.health -= 25
+            jugador.health -= 1
+            imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_{jugador.health}.png")
             jugador.ultimHit = pygame.time.get_ticks()
             jugador.shape.centerx = 200
             jugador.shape.centery = 200
+            time.sleep(0.5)
             if jugador.health <= 0:
                 run = False
                 print("Has perdut")
@@ -172,6 +174,10 @@ while run:
     textRect.y = 10
     #Dibuixar el text
     screen.blit(text, textRect)
+    
+    #Dibuiza les vides del jugador
+    imgVides = pygame.transform.scale(imgVides,(140,20))
+    screen.blit(imgVides,(utils.SCREEN_WIDTH - 170,10))
     
     # Actualitza la pantalla
     pygame.display.update()

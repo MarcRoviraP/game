@@ -28,7 +28,7 @@ enemyTimeUpdate = 0
 animacioJugador = []
 
 
-animacioJugador.append(pygame.image.load(f"assets//img//disparar//disparar_{0}.png"))
+animacioJugador.append(pygame.image.load(f"{utils.rutaIMG}disparar//disparar_{0}.png"))
 
 #Crea un objeto de la clase Personaje
 jugador = Personaje(200,200,animacioJugador)
@@ -38,7 +38,7 @@ jugador = Personaje(200,200,animacioJugador)
 animacioTorreta = []
 
 for i in range(1,7):
-    animacioTorreta.append(pygame.image.load(f"assets//img//disparar//disparar_{i}.png"))    
+    animacioTorreta.append(pygame.image.load(f"{utils.rutaIMG}disparar//disparar_{i}.png"))    
     
 torreta = Arma(animacioTorreta)
 
@@ -189,4 +189,4 @@ while run:
                 movment_W = False
             if event.key == pygame.K_SPACE:
                 shoot = False
-                jugador.img = pygame.image.load("assets//img//disparar//disparar_0.png")
+                jugador.img = pygame.image.load(f"{utils.rutaIMG}disparar//disparar_0.png")

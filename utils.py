@@ -2,6 +2,8 @@ import math
 #Determina la velocitat del joc
 VELOCITATJOC_COOLDOWN = 100
 
+tema = "space"
+rutaIMG = f"assets//{tema}//img//"
 
 SCREEN_WIDTH = 1800
 SCREEN_HEIGHT = 480

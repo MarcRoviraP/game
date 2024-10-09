@@ -31,7 +31,7 @@ animacioJugador = []
 animacioJugador.append(pygame.image.load(f"{utils.rutaIMG}disparar//disparar_{0}.png"))
 
 #Crea un objeto de la clase Personaje
-jugador = Personaje(200,200,animacioJugador)
+jugador = Personaje(utils.SPAWN_PLAYERX,utils.SPAWN_PLAYERY,animacioJugador)
 
 #Crear arma del jugador
 
@@ -73,8 +73,16 @@ while run:
         explosion.draw(screen)
         if explosion.contUpdate >= 11:
             explosions.remove(explosion)
+    
     #Spawn mobs
     if enemyTimeUpdate + utils.VELOCITATJOC_COOLDOWN * 4 <= pygame.time.get_ticks():
+        
+        #Audio spawn
+        audioSpawn = pygame.mixer.Sound(f"{utils.rutaAudio}spawn.wav")
+        #Apujar el volumen del audio 1 = 100%
+        audioSpawn.set_volume(1)
+        audioSpawn.play()
+        
         enemyTimeUpdate = pygame.time.get_ticks()
         enemy = Enemic(0, 0, pygame.time.get_ticks())  
         llistaEnemics.append(enemy)
@@ -92,8 +100,8 @@ while run:
             jugador.health -= 1
             imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_{jugador.health}.png")
             jugador.ultimHit = pygame.time.get_ticks()
-            jugador.shape.centerx = 200
-            jugador.shape.centery = 200
+            jugador.shape.centerx = utils.SPAWN_PLAYERX
+            jugador.shape.centery = utils.SPAWN_PLAYERY
             time.sleep(0.5)
             if jugador.health <= 0:
                 run = False
@@ -102,6 +110,10 @@ while run:
     if colisions:
         #Imprimir la balas que han colisionat
         score += 10
+        #Audio explocio
+        audioExplocio = pygame.mixer.Sound(f"{utils.rutaAudio}explosion.wav")
+        audioExplocio.play()
+        
         for proyectil in colisions.keys():
             #Borrar proyectil de la llista
             llistaProyectils.remove(proyectil)
@@ -112,6 +124,9 @@ while run:
             #Guardar explosions en una llista
             explosion = utils.Explocio(enemy[0].shape.centerx, enemy[0].shape.centery)
             explosions.append(explosion)
+            
+            
+            
                             
     # Dibuixar els proyectils
     for proyectil in llistaProyectils:
@@ -155,6 +170,9 @@ while run:
 
         # Crear un proyectil si el cooldown ho permet
         if pygame.time.get_ticks() - ultimTir >= utils.PROYECTILCOOLDOWN:
+            #Audio tirs
+            audioTir = pygame.mixer.Sound(f"{utils.rutaAudio}laser.wav")
+            audioTir.play()
             ultimTir = pygame.time.get_ticks()
             proyectil = Proyectil(jugador.shape.centerx, jugador.shape.centery, pygame.time.get_ticks())
             llistaProyectils.append(proyectil)

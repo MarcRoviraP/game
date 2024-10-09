@@ -57,6 +57,7 @@ colisioJugador = pygame.sprite.GroupSingle()
 score = 0
 
 
+explosions = []
 
         
 while run:
@@ -72,6 +73,13 @@ while run:
     #Dibuixar el text
     screen.blit(text, textRect)
     
+    
+    #Generar explosions
+    for explosion in explosions:
+        print(explosions)
+        explosion.draw(screen)
+        if explosion.contUpdate >= 11:
+            explosions.remove(explosion)
     #Spawn mobs
     if enemyTimeUpdate + utils.VELOCITATJOC_COOLDOWN * 4 <= pygame.time.get_ticks():
         enemyTimeUpdate = pygame.time.get_ticks()
@@ -99,14 +107,17 @@ while run:
     if colisions:
         #Imprimir la balas que han colisionat
         score += 10
-        print("Balas colisionades")
         for proyectil in colisions.keys():
             #Borrar proyectil de la llista
             llistaProyectils.remove(proyectil)
         for enemy in colisions.values():
             #Borrar enemic de la llista
             llistaEnemics.remove(enemy[0])
-                
+            
+            #Guardar explosions en una llista
+            explosion = utils.Explocio(enemy[0].shape.centerx, enemy[0].shape.centery)
+            explosions.append(explosion)
+                            
     # Dibuixar els proyectils
     for proyectil in llistaProyectils:
         if proyectil.movment():

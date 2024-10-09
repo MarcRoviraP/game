@@ -1,4 +1,4 @@
-import math
+import math,pygame
 #Determina la velocitat del joc
 VELOCITATJOC_COOLDOWN = 100
 
@@ -8,8 +8,8 @@ rutaIMG = f"assets//{tema}//img//"
 SCREEN_WIDTH = 1800
 SCREEN_HEIGHT = 480
 
-PSIZEX = 20
-PSIZEY = 20
+PERSONATGESIZEX = 20
+PERSONATGESIZEY = 20
  
 FPS = 60
 
@@ -21,7 +21,34 @@ PROYECTILCOOLDOWN = VELOCITATJOC_COOLDOWN * 3
 VELOCITAT =math.ceil(20 / VELOCITATJOC_COOLDOWN * 25) + 1
 
 MOVENEMIC = 20
-
+animacioExplosio = []
+for i in range(12):
+    img = pygame.image.load(f"{rutaIMG}explosio//explosio_{i}.png")
+    #Redimensionar la imatge
+    img = pygame.transform.scale(img,(PERSONATGESIZEX+10,PERSONATGESIZEX+10))
+    animacioExplosio.append(img)
+        
+class Explocio(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        super().__init__()
+        self.frameIndex = 0
+        self.img = animacioExplosio[self.frameIndex]
+        self.rect = self.img.get_rect()
+        self.rect.topleft = (x,y)
+        self.timeUpdate = pygame.time.get_ticks()
+        self.contUpdate = 0
+    
+    def draw(self,screen):
+        
+        if pygame.time.get_ticks() - self.timeUpdate >= VELOCITATJOC_COOLDOWN/2:
+            self.frameIndex += 1
+            self.timeUpdate = pygame.time.get_ticks()
+            self.img = animacioExplosio[self.frameIndex]
+            screen.blit(self.img,self.rect)
+            self.contUpdate += 1
+    
+      
+    
 
 class colores:
     red = (255, 0, 0)

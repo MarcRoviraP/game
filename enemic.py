@@ -45,3 +45,5 @@ class Enemic(pygame.sprite.Sprite):
             
         #Si toca el terra torna a true
         return self.shape.centery >= utils.SCREEN_HEIGHT - 100
+
+    

@@ -1,10 +1,12 @@
-import pygame,utils
+import pygame,utils,random
 
 class Enemic(pygame.sprite.Sprite):
     def __init__(self,x,y,id):
         super().__init__()
         
         self.id = id
+        self.potDisparar = False
+        
         self.img = pygame.image.load(f"{utils.rutaIMG}enemic//virus1.png")
         self.rect = self.img.get_rect()        
         self.rect.topleft = (x, y)
@@ -31,6 +33,7 @@ class Enemic(pygame.sprite.Sprite):
         
     def update(self):
         cooldown = utils.VELOCITATJOC_COOLDOWN
+        self.potDisparar = random.randint(0,1000) == random.randint(0,1000)
 
         if pygame.time.get_ticks() - self.timeUpdate > cooldown:
             self.shape.centerx += self.valorX

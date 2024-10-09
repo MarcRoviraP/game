@@ -5,7 +5,7 @@ from utils import colores
 from arma import Arma
 from enemic import Enemic
 import time
-
+from proyectilEnemic import ProyectilEnemic
 pygame.init()
 
 #Crea la pantalla en un tamany x,y i li asigna un nom
@@ -43,12 +43,14 @@ for i in range(1,7):
 torreta = Arma(animacioTorreta)
 
 llistaProyectils = []
-
+llistaProyectilsEnemics = []
 #Temporizador per als tirs
 ultimTir = 0
 
 llistaEnemics = []
 
+#Grups de colisions
+grupColisionsProyectilEnemy = pygame.sprite.Group()
 grupColisionsEnemy = pygame.sprite.Group()
 grupColisionsProyectil = pygame.sprite.Group()
 colisioJugador = pygame.sprite.GroupSingle()
@@ -66,7 +68,11 @@ while run:
     fps.tick(utils.FPS)
     screen.fill(colores.black)
     
-    
+    for proyectilEnemic in llistaProyectilsEnemics:
+        if proyectilEnemic.movment():
+            llistaProyectilsEnemics.remove(proyectilEnemic)
+            grupColisionsProyectilEnemy.remove(proyectilEnemic)
+        proyectilEnemic.draw(screen)
     
     #Generar explosions
     for explosion in explosions:
@@ -91,12 +97,18 @@ while run:
     colisioJugador.add(jugador)
     
     # Comprovar colisions entre proyectils i enemics i eliminar-los si hi ha colisio els booleans True indiquen que s'han de borrar
+    
+    #Colisio proyectil enemic
     colisions = pygame.sprite.groupcollide(grupColisionsProyectil, grupColisionsEnemy, True, True)
     
+    #Colisio jugador enemic
     colisionsEnemiPlayer = pygame.sprite.groupcollide(colisioJugador, grupColisionsEnemy, False, False)
     
+    #Colisio proyectilEnemic jugador
+    colisionsProyectilEnemicPlayer = pygame.sprite.groupcollide(grupColisionsProyectilEnemy, colisioJugador, True, False)
+    
     if jugador.ultimHit + utils.VELOCITATJOC_COOLDOWN*3 <= pygame.time.get_ticks():
-        if colisionsEnemiPlayer:
+        if colisionsEnemiPlayer or colisionsProyectilEnemicPlayer:
             jugador.health -= 1
             imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_{jugador.health}.png")
             jugador.ultimHit = pygame.time.get_ticks()
@@ -158,7 +170,13 @@ while run:
     for enemy in llistaEnemics:
         
         if enemy.update():
+            
             llistaEnemics.remove(enemy)
+        if enemy.potDisparar:
+            proyectilEnemic = ProyectilEnemic(enemy.rect.x, enemy.rect.y, pygame.time.get_ticks())
+            grupColisionsProyectilEnemy.add(proyectilEnemic)
+            llistaProyectilsEnemics.append(proyectilEnemic)
+        
         enemy.draw(screen,jugador)
         
     if shoot:
@@ -193,7 +211,7 @@ while run:
     #Dibuixar el text
     screen.blit(text, textRect)
     
-    #Dibuiza les vides del jugador
+    #Dibuixa les vides del jugador
     imgVides = pygame.transform.scale(imgVides,(140,20))
     screen.blit(imgVides,(utils.SCREEN_WIDTH - 170,10))
     

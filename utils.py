@@ -4,6 +4,8 @@ VELOCITATJOC_COOLDOWN = 100
 
 tema = "space"
 rutaIMG = f"assets//{tema}//img//"
+rutaAudio = f"assets//{tema}//audio//"
+rutaFonts = f"assets//{tema}//font//"
 
 SCREEN_WIDTH = 1800
 SCREEN_HEIGHT = 480

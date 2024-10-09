@@ -4,7 +4,7 @@ from proyectil import Proyectil
 from utils import colores
 from arma import Arma
 from enemic import Enemic
-    
+import fontTools
 
 pygame.init()
 
@@ -64,14 +64,7 @@ while run:
     # Controlar els fps del programa
     fps.tick(utils.FPS)
     screen.fill(colores.black)
-    #Crear label score
-    font = pygame.font.Font(None, 36)
-    text = font.render(f"Score: {score}", True, colores.white)
-    textRect = text.get_rect()
-    textRect.center = (utils.SCREEN_WIDTH // 2, 50)
-    textRect.y = 10
-    #Dibuixar el text
-    screen.blit(text, textRect)
+    
     
     
     #Generar explosions
@@ -168,6 +161,18 @@ while run:
     # Dibuixar el jugador
     jugador.draw(screen)
    
+   
+    #Crear label score
+    #Carrega font PressStart2P
+    
+    font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P//PressStart2P-Regular.ttf", 30)
+    text = font.render(f"Score: {score}", True, colores.white)
+    textRect = text.get_rect()
+    textRect.center = (utils.SCREEN_WIDTH // 2, 50)
+    textRect.y = 10
+    #Dibuixar el text
+    screen.blit(text, textRect)
+    
     # Actualitza la pantalla
     pygame.display.update()
 

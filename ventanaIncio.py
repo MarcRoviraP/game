@@ -6,7 +6,7 @@ class ventanaInicio():
 
         #Carrega font PressStart2P
         
-        font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P//PressStart2P-Regular.ttf", 25)
+        font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P/PressStart2P-Regular.ttf", 25)
 
 
         # Configuración de la pantalla
@@ -38,18 +38,18 @@ class ventanaInicio():
                             
                             if button["text"] == "Space Invders":
                                 utils.tema = "space"
-                                utils.rutaAudio = f"assets//{utils.tema}//audio//"
-                                utils.rutaIMG = f"assets//{utils.tema}//img//"
-                                utils.rutaFonts = f"assets//{utils.tema}//font//"
+                                utils.rutaAudio = f"assets/{utils.tema}/audio/"
+                                utils.rutaIMG = f"assets/{utils.tema}/img/"
+                                utils.rutaFonts = f"assets/{utils.tema}/font/"
                                 utils.backColor = utils.colores.black
                                 
                             elif button["text"] == "Moros i Crisitians":
 
                                 utils.tema = "morosicristians"
                                 
-                                utils.rutaAudio = f"assets//{utils.tema}//audio//"
-                                utils.rutaIMG = f"assets//{utils.tema}//img//"
-                                utils.rutaFonts = f"assets//{utils.tema}//font//"
+                                utils.rutaAudio = f"assets/{utils.tema}/audio/"
+                                utils.rutaIMG = f"assets/{utils.tema}/img/"
+                                utils.rutaFonts = f"assets/{utils.tema}/font/"
                                 utils.backColor = utils.colores.khaki
                             import main
                             main.main()

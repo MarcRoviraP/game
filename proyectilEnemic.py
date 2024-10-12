@@ -4,7 +4,7 @@ class ProyectilEnemic(pygame.sprite.Sprite):
     def __init__(self, x, y,id):
         super().__init__()
         self.id = id
-        self.img = pygame.image.load(f"{utils.rutaIMG}enemic//municio.png")
+        self.img = pygame.image.load(f"{utils.rutaIMG}enemic/municio.png")
         self.rect = self.img.get_rect()
         self.rect.topleft = (x, y)
         self.shape = self.rect

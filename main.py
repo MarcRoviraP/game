@@ -30,7 +30,7 @@ class main():
         animacioJugador = []
 
 
-        animacioJugador.append(pygame.image.load(f"{utils.rutaIMG}disparar//disparar_{0}.png"))
+        animacioJugador.append(pygame.image.load(f"{utils.rutaIMG}disparar/disparar_{0}.png"))
 
         #Crea un objeto de la clase Personaje
         jugador = Personaje(utils.SPAWN_PLAYERX,utils.SPAWN_PLAYERY,animacioJugador)
@@ -40,7 +40,7 @@ class main():
         animacioTorreta = []
 
         for i in range(1,7):
-            animacioTorreta.append(pygame.image.load(f"{utils.rutaIMG}disparar//disparar_{i}.png"))    
+            animacioTorreta.append(pygame.image.load(f"{utils.rutaIMG}disparar/disparar_{i}.png"))    
             
         torreta = Arma(animacioTorreta)
 
@@ -64,7 +64,7 @@ class main():
         explosions = []
 
         #Crear img vides jugador
-        imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_4.png")
+        imgVides = pygame.image.load(f"{utils.rutaIMG}jugador/vides/vides_4.png")
         while run:
 
             # Controlar els fps del programa
@@ -120,7 +120,7 @@ class main():
             if jugador.ultimHit + utils.VELOCITATJOC_COOLDOWN*3 <= pygame.time.get_ticks():
                 if colisionsEnemiPlayer or colisionsProyectilEnemicPlayer:
                     jugador.health -= 1
-                    imgVides = pygame.image.load(f"{utils.rutaIMG}jugador//vides//vides_{jugador.health}.png")
+                    imgVides = pygame.image.load(f"{utils.rutaIMG}jugador/vides/vides_{jugador.health}.png")
                     jugador.ultimHit = pygame.time.get_ticks()
                     jugador.shape.centerx = utils.SPAWN_PLAYERX
                     jugador.shape.centery = utils.SPAWN_PLAYERY
@@ -215,7 +215,7 @@ class main():
             #Crear label score
             #Carrega font PressStart2P
             
-            font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P//PressStart2P-Regular.ttf", 30)
+            font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P/PressStart2P-Regular.ttf", 30)
             text = font.render(f"Score: {score}", True, colores.white)
             textRect = text.get_rect()
             textRect.center = (utils.SCREEN_WIDTH // 2, 50)
@@ -262,5 +262,5 @@ class main():
                         movment_W = False
                     if event.key == pygame.K_SPACE:
                         shoot = False
-                        jugador.img = pygame.image.load(f"{utils.rutaIMG}disparar//disparar_0.png")
+                        jugador.img = pygame.image.load(f"{utils.rutaIMG}disparar/disparar_0.png")
     

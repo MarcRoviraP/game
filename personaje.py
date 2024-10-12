@@ -44,11 +44,11 @@ class Personaje(pygame.sprite.Sprite):
             
         #Actualizar img
         if self.health == 1:
-            self.img = pygame.image.load(f"{utils.rutaIMG}jugador//nave_3.png")
+            self.img = pygame.image.load(f"{utils.rutaIMG}jugador/nave_3.png")
         elif self.health == 2:
-            self.img = pygame.image.load(f"{utils.rutaIMG}jugador//nave_2.png")
+            self.img = pygame.image.load(f"{utils.rutaIMG}jugador/nave_2.png")
         elif self.health == 3:
-            self.img = pygame.image.load(f"{utils.rutaIMG}jugador//nave_1.png")
+            self.img = pygame.image.load(f"{utils.rutaIMG}jugador/nave_1.png")
     
     def update(self):
         #Actualiza la animacio del jugador

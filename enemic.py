@@ -7,7 +7,7 @@ class Enemic(pygame.sprite.Sprite):
         self.id = id
         self.potDisparar = False
         
-        self.img = pygame.image.load(f"{utils.rutaIMG}enemic//virus1.png")
+        self.img = pygame.image.load(f"{utils.rutaIMG}enemic/virus1.png")
         self.rect = self.img.get_rect()        
         self.rect.topleft = (x, y)
 

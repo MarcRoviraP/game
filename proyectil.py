@@ -5,7 +5,7 @@ class Proyectil(pygame.sprite.Sprite):
         super().__init__()
         self.id = id
         y -= 30
-        self.img = pygame.image.load(f"{utils.rutaIMG}disparar//municio.png")
+        self.img = pygame.image.load(f"{utils.rutaIMG}disparar/municio.png")
         self.rect = self.img.get_rect()    
             
         self.rect.topleft = (x, y)

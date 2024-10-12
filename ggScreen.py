@@ -6,7 +6,7 @@ class ggScreen():
         pygame.init()
         #Carrega font PressStart2P
         
-        font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P//PressStart2P-Regular.ttf", 30)
+        font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P/PressStart2P-Regular.ttf", 30)
 
         # Configuración de la pantalla
         screen = pygame.display.set_mode((utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT+200))
@@ -54,7 +54,7 @@ class ggScreen():
             #Crear label score
             text = font.render(f"Score: {score}", True, utils.colores.white)
             textRect = text.get_rect()
-            textRect.center = (utils.SCREEN_WIDTH // 2, 50)
+            textRect.center = (utils.SCREEN_WIDTH / 2, 50)
             textRect.y = 100
             #Dibuixar el text
             screen.blit(text, textRect)

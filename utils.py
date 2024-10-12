@@ -3,9 +3,9 @@ import math,pygame
 VELOCITATJOC_COOLDOWN = 100
 
 tema = "space"
-rutaIMG = f"assets//{tema}//img//"
-rutaAudio = f"assets//{tema}//audio//"
-rutaFonts = f"assets//{tema}//font//"
+rutaIMG = f"assets/{tema}/img/"
+rutaAudio = f"assets/{tema}/audio/"
+rutaFonts = f"assets/{tema}/font/"
 
 
 SCREEN_WIDTH = 1800
@@ -29,7 +29,7 @@ MOVENEMIC = 20
 randomEnemic = 1000
 animacioExplosio = []
 for i in range(12):
-    img = pygame.image.load(f"{rutaIMG}explosio//explosio_{i}.png")
+    img = pygame.image.load(f"{rutaIMG}explosio/explosio_{i}.png")
     #Redimensionar la imatge
     img = pygame.transform.scale(img,(PERSONATGESIZEX+10,PERSONATGESIZEX+10))
     animacioExplosio.append(img)

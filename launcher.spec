@@ -5,7 +5,7 @@ a = Analysis(
     ['launcher.py'],
     pathex=[],
     binaries=[],
-    datas=[('assets/space/img/explosio/explosio_0.png', 'assets/space/img/explosio')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

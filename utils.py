@@ -25,6 +25,8 @@ PROYECTILCOOLDOWN = VELOCITATJOC_COOLDOWN * 3
 VELOCITAT =math.ceil(20 / VELOCITATJOC_COOLDOWN * 25) + 1
 
 MOVENEMIC = 20
+
+randomEnemic = 1000
 animacioExplosio = []
 for i in range(12):
     img = pygame.image.load(f"{rutaIMG}explosio//explosio_{i}.png")

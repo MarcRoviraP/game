@@ -33,7 +33,7 @@ class Enemic(pygame.sprite.Sprite):
         
     def update(self):
         cooldown = utils.VELOCITATJOC_COOLDOWN
-        self.potDisparar = random.randint(0,1000) == random.randint(0,1000)
+        self.potDisparar = random.randint(0,utils.randomEnemic) == random.randint(0,utils.randomEnemic)
 
         if pygame.time.get_ticks() - self.timeUpdate > cooldown:
             self.shape.centerx += self.valorX

@@ -17,7 +17,7 @@ class ventanaInicio():
 
         # Botones
         buttons = [
-            {"text": "Space Invders", "rect": pygame.Rect((utils.SCREEN_WIDTH/2)-200, 300, 500, 100)},
+            {"text": "Space Invaders", "rect": pygame.Rect((utils.SCREEN_WIDTH/2)-200, 300, 500, 100)},
             {"text": "Moros i Crisitians", "rect": pygame.Rect(utils.SCREEN_WIDTH/2-200, 500, 500, 100)},
         ]
 

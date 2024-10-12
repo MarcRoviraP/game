@@ -1,14 +1,12 @@
-from PyInstaller.utils.hooks import collect_submodules
+# -*- mode: python ; coding: utf-8 -*-
 
-# Añadir todos los submódulos de pygame
-hiddenimports = collect_submodules('pygame')
 
 a = Analysis(
     ['launcher.py'],
     pathex=[],
     binaries=[],
-    datas=[('assets/space/img/explosio/*', 'assets/space/img/explosio/')],
-    hiddenimports=hiddenimports,  # Asegurar que todos los submódulos de pygame se incluyen
+    datas=[],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

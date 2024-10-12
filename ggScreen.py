@@ -1,23 +1,22 @@
-import pygame,utils,sys
+import pygame,utils
 
 
 class ggScreen():    
-    def __init__(self):
+    def __init__(self,score):
         pygame.init()
-
-        #Crear un menu de inici
+        #Carrega font PressStart2P
+        
+        font = pygame.font.Font(f"{utils.rutaFonts}Press_Start_2P//PressStart2P-Regular.ttf", 30)
 
         # Configuración de la pantalla
-        screen = pygame.display.set_mode((800, 600))
+        screen = pygame.display.set_mode((utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT+200))
         pygame.display.set_caption("Buena Partida")
 
-        # Fuentes
-        font = pygame.font.Font(None, 36)
 
         # Botones
         buttons = [
-            {"text": "Eixir", "rect": pygame.Rect(200, 300, 300, 50)},
-            {"text": "Tornar a jugar", "rect": pygame.Rect(200, 400, 300, 50)},
+            {"text": "Eixir", "rect": pygame.Rect((utils.SCREEN_WIDTH/2)-200, 300, 500, 100)},
+            {"text": "Tornar a jugar", "rect": pygame.Rect(utils.SCREEN_WIDTH/2-200, 500, 500, 100)},
         ]
 
         # Bucle principal
@@ -52,6 +51,13 @@ class ggScreen():
                 text_rect = text.get_rect(center=button["rect"].center)
                 screen.blit(text, text_rect)
 
+            #Crear label score
+            text = font.render(f"Score: {score}", True, utils.colores.white)
+            textRect = text.get_rect()
+            textRect.center = (utils.SCREEN_WIDTH // 2, 50)
+            textRect.y = 100
+            #Dibuixar el text
+            screen.blit(text, textRect)
             pygame.display.flip()
 
         pygame.quit()

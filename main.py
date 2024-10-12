@@ -127,7 +127,7 @@ class main():
                     time.sleep(0.5)
                     if jugador.health <= 0:
                         import ggScreen
-                        ggScreen.ggScreen()
+                        ggScreen.ggScreen(score)
                         run = False
                         break
                 

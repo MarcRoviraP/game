@@ -15,6 +15,9 @@ class ventanaInicio():
 
    
 
+        #Reproduir música
+        musica = pygame.mixer.Sound(f"assets/morosicristians/audio/paquitoChocolatero.wav").play()
+        
         # Botones
         buttons = [
             {"text": "Space Invaders", "rect": pygame.Rect((utils.SCREEN_WIDTH/2)-200, 300, 500, 100)},
@@ -37,20 +40,22 @@ class ventanaInicio():
                         if button["rect"].collidepoint(x, y):
                             
                             if button["text"] == "Space Invders":
-                                utils.tema = "space"
-                                utils.rutaAudio = f"assets/{utils.tema}/audio/"
-                                utils.rutaIMG = f"assets/{utils.tema}/img/"
-                                utils.rutaFonts = f"assets/{utils.tema}/font/"
+                                tema = "space"
+                                utils.tema = tema
+                                utils.rutaAudio = f"assets/{tema}/audio/"
+                                utils.rutaIMG = f"assets/{tema}/img/"
+                                utils.rutaFonts = f"assets/{tema}/font/"
                                 utils.backColor = utils.colores.black
                                 
                             elif button["text"] == "Moros i Crisitians":
-
-                                utils.tema = "morosicristians"
+                                tema = "morosicristians"
+                                utils.tema = tema
                                 
-                                utils.rutaAudio = f"assets/{utils.tema}/audio/"
-                                utils.rutaIMG = f"assets/{utils.tema}/img/"
-                                utils.rutaFonts = f"assets/{utils.tema}/font/"
+                                utils.rutaAudio = f"assets/{tema}/audio/"
+                                utils.rutaIMG = f"assets/{tema}/img/"
+                                utils.rutaFonts = f"assets/{tema}/font/"
                                 utils.backColor = utils.colores.khaki
+                            musica.stop()
                             import main
                             main.main()
                             run = False

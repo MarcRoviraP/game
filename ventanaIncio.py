@@ -39,7 +39,7 @@ class ventanaInicio():
                     for button in buttons:
                         if button["rect"].collidepoint(x, y):
                             
-                            if button["text"] == "Space Invders":
+                            if button["text"] == "Space Invaders":
                                 tema = "space"
                                 utils.tema = tema
                                 utils.rutaAudio = f"assets/{tema}/audio/"

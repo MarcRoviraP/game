@@ -63,6 +63,11 @@ class main():
 
         explosions = []
 
+        #Img fondo
+        imgFondo = pygame.image.load(f"{utils.rutaIMG}background/background.png")
+        
+        #Cargar la img
+        imgFondo = pygame.transform.scale(imgFondo,(utils.SCREEN_WIDTH,utils.SCREEN_HEIGHT))
         #Crear img vides jugador
         imgVides = pygame.image.load(f"{utils.rutaIMG}jugador/vides/vides_4.png")
         while run:
@@ -70,6 +75,8 @@ class main():
             # Controlar els fps del programa
             fps.tick(utils.FPS)
             screen.fill(utils.backColor)
+            
+            screen.blit(imgFondo,(0,0))
             
             #Cada 100 punts de score augmenta random enemic
             #Comprobar cada 10 sec

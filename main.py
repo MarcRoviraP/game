@@ -15,6 +15,8 @@ class main():
         pygame.display.set_caption("Mi Juego")
 
 
+        utils.randomEnemic = 1000   
+        
         movment_W = False
         movment_A = False
         movment_S = False
